@@ -1,0 +1,69 @@
+{{#each articles}}
+<ul class="collapsible" data-collapsible="accordion">
+  <li>
+    <div class="collapsible-header  z-depth-2">
+      <i class="material-icons">library_books</i> <b>{{updated}}</b>
+      <div style="clear: left; line-height: 110%; padding-bottom: 10px;"><b>{{title}}</b></div>
+    </div>
+    <div class="collapsible-body ">
+      <p>
+        {{summary}}
+        <br><br>
+        <i>full article <a href="{{link}}" target="_new">here</a>.</i>
+      </p>
+    </div>
+  </li>
+  <li>
+    <div class="collapsible-header  z-depth-2"><i class="material-icons">thumbs_up_down</i>Add a Comment</div>
+    <div class="collapsible-body ">
+      <form id="form-add-{{_id}}" action="add/comment/{{_id}}" method="post">
+        <div class="row">
+          <div class="input-field col s2"></div>
+          <div class="input-field col s8">
+            <input id="author_name" name="name" type="text" class="validate">
+            <label for="author_name">Your Name:</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s2"></div>
+          <div class="input-field col s8">
+            <textarea id="comment_box" name="comment" class="materialize-textarea"></textarea>
+            <label for="comment_box">Your Reaction:</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s2"></div>
+          <div class="input-field col s8">
+            <center><input class="btn " data-id="{{_id}}" type="submit" value="Submit"></center>
+          </div>
+        </div>
+      </form>
+    </div>
+  </li>
+  <li>
+    <div class="collapsible-header "><i class="material-icons">comment</i>View Comments</div>
+    <div class="collapsible-body ">
+      {{#if notes}}
+      <ul class="collection">
+        {{#each notes}}
+        <li class="collection-item ">
+          <b>{{author}}</b>
+          <span class="badge">
+            <form id="form-delete-{{_id}}" action="remove/comment/{{_id}}" method="post">
+              <input class="btn-small white-text deep-orange darken-5 delete-comment-button" data-id="{{_id}}" type="submit"
+                value="Delete">
+            </form>
+          </span>
+          <br>
+          {{commentBody}}
+        </li>
+        {{/each}}
+      </ul>
+      {{else}}
+      <p><i class="material-icons">not_interested</i>No Comments Yet </p>
+      {{/if}}
+    </div>
+  </li>
+
+</ul>
+{{/each}}
